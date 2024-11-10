@@ -10,8 +10,8 @@ def get_movies():
     response = requests.get(f"{API_URL}/movie", headers=headers)
     return response.json()
 
-def log_search(db: Session, query: str, response: str):
-    history_entry = SearchHistory(query=query, response=response)
+def log_search(db: Session, user: str, query: str, response: str):
+    history_entry = SearchHistory(user=user, query=query, response=response)
     db.add(history_entry)
     db.commit()
     db.refresh(history_entry)

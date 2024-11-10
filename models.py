@@ -9,6 +9,7 @@ class SearchHistoryResponse(BaseModel):
     query: str
     timestamp: datetime
     response: str
+    user: str
 
     class Config:
         orm_mode = True

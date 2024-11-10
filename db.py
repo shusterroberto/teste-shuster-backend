@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import datetime
+from datetime import datetime
 
 DATABASE_URL = "sqlite:///./history.db"
 
@@ -12,10 +12,12 @@ Base = declarative_base()
 
 class SearchHistory(Base):
     __tablename__ = "search_history"
-
+    
     id = Column(Integer, primary_key=True, index=True)
-    query = Column(String, index=True)
-    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+    user = Column(String, nullable=False)  # Campo para armazenar o usuário
+    query = Column(String, nullable=True)
     response = Column(String)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+
 
 Base.metadata.create_all(bind=engine)
